@@ -21,6 +21,7 @@
 		</div>
 	</header>
 	<!-- END HEADER | the header element in new to HTML5 -->
+	<body>
 		<div class="main">
 			<h2>This is just an example with some web content. This is the Hero Unit.</h2>
 		</div>
@@ -33,6 +34,13 @@
 			<h3>Featured Content 2</h3>
 			<p>lorem ipsum dolor amet lorem ipsum dolor ametlorem ipsum dolor ametlorem ipsum dolor ametlorem ipsum dolor ametlorem ipsum dolor ametlorem ipsum dolor ametlorem ipsum dolor.</p>
 		</div>
+		<form>
+                    <label>User Email:</label>
+                    <input type="email" class="form-control" name="email" placeholder="email..." id="email">
+                    <button type="button" class="btn btn-primary" onclick="register()">register</button>
+                    <button type="button" class="btn btn-secondary" onclick="purchase()">Purchase</button>
+                    <button type="button" class="btn btn-secondary" onclick="addToCart()">Add Cart</button>
+                </form>
 		<script type="text/javascript">
 		  !function(q,g,r,a,p,h,js) {
 		    if(q.qg)return;
@@ -44,6 +52,42 @@
 		    h.parentNode.insertBefore(p,h);
 		  } (window,document,'script','https://cdn.qgr.ph/qgraph.78348b7ab4524f0415fb.js');
 		</script>
+		function register() {
+		    usr_email = document.getElementById("email").value;
+
+		    if (usr_email != "") {
+			qg("identify", {"email": usr_email});
+			alert("you have registered the email.");
+		    } else {
+			alert("please enter the email");
+		    }      
+
+		}
+
+		function purchase() {
+		    product_name = document.getElementById("modal_pd_names").innerHTML;
+		    product_image = document.getElementById("modal_pd_image").src;
+		    // push events
+		    qg("event", "checkout_completed", {
+			"product_id": product_name,
+			"product_name": product_name, 
+			"image": product_image
+		    });
+		    alert("you purchased one item.");
+		}
+
+		function addToCart() {
+		    product_name = document.getElementById("modal_pd_names").innerHTML;
+		    product_image = document.getElementById("modal_pd_image").src;
+		    // push events
+		    qg("event", "product_added_to_cart", {
+			"product_id": product_name,
+			"product_name": product_name, 
+			"image": product_image
+		    });
+		    alert("you add one item to the cart");
+		}
+	</body>
 	<footer>
 		&copy;2012 Francisco Campos Arias, All Rigts Reserved.
 	</footer>
