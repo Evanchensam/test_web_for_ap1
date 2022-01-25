@@ -56,7 +56,18 @@
 		    p=g.createElement(r);p.async=!0;p.src=a;h=g.getElementsByTagName(r)[0];
 		    h.parentNode.insertBefore(p,h);
 		  } (window,document,'script','https://cdn.qgr.ph/qgraph.78348b7ab4524f0415fb.js');
-		
+		//service worker registration
+		if ('serviceWorker' in navigator) {
+		  window.addEventListener('load', function() {
+		    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+		      // Registration was successful
+		      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		    }, function(err) {
+		      // registration failed :(
+		      console.log('ServiceWorker registration failed: ', err);
+		    });
+		  });
+		}
 		function register() {
 		    usr_email = document.getElementById("email").value;
 
